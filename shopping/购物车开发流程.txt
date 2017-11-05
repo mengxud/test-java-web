@@ -1,0 +1,50 @@
+1.需求
+
+a.用户可以登录
+b.用户可以购买商品
+c.用户可以对购物车的商品进行购买和删除
+d.用户可以下订单
+e.系统可以发送电子邮件给用户
+
+2.界面设计
+
+登陆界面->购物大厅->显示我的购物车->预览订单->显示订单成功
+
+
+3.设计数据库和表
+
+1）用户表
+create table users(
+   id number primary key,
+   name varchar2(50) not null,
+   pwd varchar2(50) not null,
+   email varchar2(100) not null,
+   tel varchar2(20) not null,
+   grade number(2) default 1 not null
+)
+2）商品表
+create table goods(
+   id number primary key,
+   name varchar2(2) not null,
+   author varchar2(100) not null,
+   publishHouse varchar2(100) not null,
+   price number not null,
+   nums number defalut 1000 not null
+)
+
+3）订单表
+create table orders(
+   id number primary key, 
+   userid number primary key references users(id),
+   total Price defalut 0 not null,
+   orderDate date defalut sysdate not null,
+   nums number defalut 1000 not null
+)
+
+4)订单细节表
+create table ordersItem(
+   id number primary key, 
+   ordersId number primary key references orders(id),
+   bookid number references book(id),
+   bookNum number default 0 not null
+)
